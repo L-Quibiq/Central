@@ -1,9 +1,20 @@
 name: Deploy Azure Logic App
 
 on:
-  push:
-    branches:
-      - dafault
+  workflow_call:
+    inputs:
+      resource-group:
+        required: true
+        type: string
+      logic-app-name:
+        required: true
+        type: string
+      location:
+        required: true
+        type: string
+      storage-account-name:
+        required: true
+        type: string
 
 jobs:
   build-and-deploy:
