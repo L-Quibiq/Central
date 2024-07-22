@@ -40,7 +40,7 @@ jobs:
         az group create --name $RESOURCE_GROUP --location $LOCATION
 
         # Deploy Logic App
-        az logicapp standard create --resource-group $RESOURCE_GROUP --name $LOGIC_APP_NAME --storage-account $STORAGE_ACCOUNT --location $LOCATION --sku-name Standard
+        az logicapp create -g $RESOURCE_GROUP --subscription a8f3d4e3-c60d-48bf-a230-bb008ff8a887 -p ASP-edekatests-bf2f -n $LOGIC_APP_NAME -s $STORAGE_ACCOUNT
 
         # Deploy Logic App workflow
-        az logicapp deployment create --resource-group $RESOURCE_GROUP --name $LOGIC_APP_NAME --content-path ./logic-app
+        az logic workflow create --resource-group $RESOURCE_GROUP --name workflow --definition ./logic-app/workflows/workflow-1.json
