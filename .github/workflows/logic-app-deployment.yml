@@ -24,6 +24,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Check environment variables
+      run: |
+        echo "CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS.clientId }}"
+        echo "TENANT_ID: ${{ secrets.AZURE_CREDENTIALS.tenantId }}"
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Login to Azure CLI
       uses: azure/login@v1
       with:
