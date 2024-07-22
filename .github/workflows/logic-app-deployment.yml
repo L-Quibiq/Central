@@ -17,23 +17,12 @@ on:
         type: string
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build project
-      run: npm run build
 
     - name: Login to Azure CLI
       uses: azure/login@v1
@@ -54,4 +43,4 @@ jobs:
         az logicapp standard create --resource-group $RESOURCE_GROUP --name $LOGIC_APP_NAME --storage-account $STORAGE_ACCOUNT --location $LOCATION --sku-name Standard
 
         # Deploy Logic App workflow
-        az logicapp deployment create --resource-group $RESOURCE_GROUP --name $LOGIC_APP_NAME --content-path ./path-to-your-logic-app
+        az logicapp deployment create --resource-group $RESOURCE_GROUP --name $LOGIC_APP_NAME --content-path ./logic-app
