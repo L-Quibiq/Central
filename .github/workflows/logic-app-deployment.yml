@@ -24,22 +24,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Check Azure Credentials
-      run: |
-        echo "Test: ${{ secrets.Test }}"
-
-    - name: Check Azure Credentials
-      run: |
-        echo "AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}"
-        echo "CLIENT_ID: $(echo ${{ secrets.AZURE_CREDENTIALS }} | jq -r .clientId)"
-        echo "TENANT_ID: $(echo ${{ secrets.AZURE_CREDENTIALS }} | jq -r .tenantId)"
-      env:
-        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-
     - name: Login to Azure CLI
       uses: azure/login@v1
       with:
-        clientId: asd
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy Logic App
       run: |
