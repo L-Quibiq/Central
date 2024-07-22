@@ -2,6 +2,13 @@ name: Hello World Workflow
 
 on:
   workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      envPAT:
+        required: true
 
 jobs:
   say-hello:
