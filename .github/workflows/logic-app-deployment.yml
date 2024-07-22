@@ -29,12 +29,12 @@ jobs:
         echo "CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS.clientId }}"
         echo "TENANT_ID: ${{ secrets.AZURE_CREDENTIALS.tenantId }}"
       env:
-        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS_2 }}
 
     - name: Login to Azure CLI
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS_2 }}
 
     - name: Deploy Logic App
       run: |
