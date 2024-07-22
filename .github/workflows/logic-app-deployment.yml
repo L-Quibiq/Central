@@ -42,10 +42,10 @@ jobs:
 
     - name: Deploy Logic App
       run: |
-        RESOURCE_GROUP=<your-resource-group>
-        LOGIC_APP_NAME=<your-logic-app-name>
-        LOCATION=<your-location>
-        STORAGE_ACCOUNT=<your-storage-account-name>
+        RESOURCE_GROUP=${{ inputs.resource-group }}
+        LOGIC_APP_NAME=${{ inputs.logic-app-name }}
+        LOCATION=${{ inputs.location }}
+        STORAGE_ACCOUNT=${{ inputs['storage-account-name'] }}
 
         # Create resource group if it doesn't exist
         az group create --name $RESOURCE_GROUP --location $LOCATION
