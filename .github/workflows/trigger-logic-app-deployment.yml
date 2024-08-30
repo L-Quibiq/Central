@@ -23,12 +23,8 @@ jobs:
     - name: Parse appsettings.json
       id: parse_appsettings
       run: |
-        echo "Parsing appsettings JSON"
-        echo '${{ inputs.appsettings-json }}' | jq '.' > appsettings.json
-        
-        # You can also extract specific values if needed
-        connection_string=$(echo '${{ inputs.appsettings-json }}' | jq -r '.ConnectionStrings.DefaultConnection')
-        echo "CONNECTION_STRING=${connection_string}" >> $GITHUB_ENV
+          echo '${{ inputs.appsettings-json }}' | base64 --decode > appsettings.json
+          cat appsettings.json  # To verify the decoded content
 
     - name: Deploy Logic App
       run: |
