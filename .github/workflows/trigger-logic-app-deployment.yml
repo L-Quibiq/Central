@@ -25,13 +25,13 @@ jobs:
       run: |
           echo '${{ inputs.appsettings-json }}' | base64 --decode > decoded_appsettings.json
           resource-group=$(jq -r '.ResourceGroup' decoded_appsettings.json)
-          echo 'resource-group=${resource-group}' >> $GITHUB_ENV
+          echo "resource_group=${resource_group}" >> $GITHUB_ENV
           logic-app-name=$(jq -r '.LogicAppName' decoded_appsettings.json)
-          echo 'logic-app-name=${logic-app-name}' >> $GITHUB_ENV
+          echo "logic_app_name=${logic_app_name}" >> $GITHUB_ENV
           location=$(jq -r '.Location' decoded_appsettings.json)
-          echo 'location=${location}' >> $GITHUB_ENV
+          echo "location=${location}" >> $GITHUB_ENV
           storage-account-name=$(jq -r '.StorageAccountName' decoded_appsettings.json)
-          echo 'storage-account-name=${storage-account-name}' >> $GITHUB_ENV
+          echo "storage_account_name=${storage_account_name}" >> $GITHUB_ENV
 
     - name: Deploy Logic App
       run: |
