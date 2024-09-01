@@ -23,15 +23,22 @@ jobs:
     - name: Parse appsettings.json
       id: parse_appsettings
       run: |
-          echo '${{ inputs.appsettings-json }}' | base64 --decode > appsettings.json
-          cat appsettings.json  # To verify the decoded content
+          echo '${{ inputs.appsettings-json }}' | base64 --decode > decoded_appsettings.json
+          resource-group=$(jq -r '.ResourceGroup' decoded_appsettings.json)
+          echo 'resource-group=${resource-group}' >> $GITHUB_ENV
+          logic-app-name=$(jq -r '.LogicAppName' decoded_appsettings.json)
+          echo 'logic-app-name=${logic-app-name}' >> $GITHUB_ENV
+          location=$(jq -r '.Location' decoded_appsettings.json)
+          echo 'location=${location}' >> $GITHUB_ENV
+          storage-account-name=$(jq -r '.StorageAccountName' decoded_appsettings.json)
+          echo 'storage-account-name=${storage-account-name}' >> $GITHUB_ENV
 
     - name: Deploy Logic App
       run: |
-        RESOURCE_GROUP=${{ inputs.resource-group }}
-        LOGIC_APP_NAME=${{ inputs.logic-app-name }}
-        LOCATION=${{ inputs.location }}
-        STORAGE_ACCOUNT=${{ inputs['storage-account-name'] }}
+        RESOURCE_GROUP=${{ env.resource-group }}
+        LOGIC_APP_NAME=${{ env.logic-app-name }}
+        LOCATION=${{ env.location }}
+        STORAGE_ACCOUNT=${{ env.storage-account-name }}
 
         # Create resource group if it doesn't exist
         az group create --name $RESOURCE_GROUP --location $LOCATION
