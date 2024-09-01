@@ -9,6 +9,7 @@ on:
 
 jobs:
   deploy:
+    name: Logic App Deployment
     runs-on: ubuntu-latest
 
     steps:
